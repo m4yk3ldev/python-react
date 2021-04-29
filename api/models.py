@@ -1,6 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinLengthValidator
+from django.db import models
 
 
 class Movie(models.Model):
@@ -12,6 +11,21 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.title} -> {self.description}"
+
+    def no_of_ratings(self):
+        ratings = Rating.objects.filter(movie=self)
+        return ratings.count()
+
+    def avg_rating(self):
+        sum = 0
+        ratings = Rating.objects.filter(movie=self)
+        for rating in ratings:
+            sum += rating.stars
+
+        if ratings.count() > 0:
+            return sum / len(ratings)
+        else:
+            return 0
 
 
 class Rating(models.Model):
