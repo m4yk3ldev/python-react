@@ -1,17 +1,23 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import Header from "./components/header";
+import Footer from "./components/footer";
+
+
+
+function createAlert() {
+    alert("Hello, You clicked me")
+}
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p> Editar <code>src/App.js</code> y guardar para cargar. </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Aprender React
-                </a>
-            </header>
-        </div>
+        <React.Fragment>
+            <div className="App">
+                <Header info="this is my message"/>
+                <p>main content</p>
+                <Footer trademark="page by Maykel" myalert={createAlert}/>
+            </div>
+        </React.Fragment>
     );
 }
 
