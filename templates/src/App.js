@@ -32,20 +32,23 @@ class App extends Component {
     movieDeleted = selMovie => {
         const movies = this.state.movies.filter(movie => movie.id !== selMovie.id);
         this.setState({movies: movies, editedMovie: null})
-        this.componentDidMount();
+
     }
 
     editClicked = selMovie => {
         this.setState({editedMovie: selMovie})
-        this.componentDidMount();
+
     }
     newMovie = () => {
         this.setState({editedMovie: {title: '', description: ''}})
-        this.componentDidMount();
     }
     cancelForm = () => {
         this.setState({editedMovie: null})
-        this.componentDidMount();
+
+    }
+
+    addMovie = movie => {
+        this.setState({movies: [...this.state.movies, movie]})
     }
 
     render() {
@@ -58,7 +61,8 @@ class App extends Component {
                                newMovie={this.newMovie}/>
                     <div>
                         {this.state.editedMovie ? (
-                            <MovieForm movie={this.state.editedMovie} cancelForm={this.cancelForm}/>
+                            <MovieForm movie={this.state.editedMovie} cancelForm={this.cancelForm}
+                                       newMovie={this.addMovie} editedMovie={this.movieClicked}/>
                         ) : (
                             <MovieDetails movie={this.state.selectedMovie} updateMovie={this.movieClicked}/>
 
