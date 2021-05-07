@@ -1,18 +1,29 @@
 import React from "react";
 
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faEdit} from "@fortawesome/free-regular-svg-icons";
 
 function MovieList(props) {
-    const movieClicked = movie => event => {
+    const movieClicked = movie => {
         props.movieClicked(movie)
     }
+    const removeClicked = movie => {
+        props.movieClicked(movie)
+    }
+    const editClicked = movie => {
+        alert(movie)
+    }
+
     return (
         <div>
             {
                 props.movies.map(movie => {
                     return (
-                        <div onClick={movieClicked(movie)} key={movie.id}>
-                            <h3>{movie.title}</h3>
-
+                        <div key={movie.id}>
+                            <h3 onClick={() => movieClicked(movie)}>{movie.title}</h3>
+                            <FontAwesomeIcon icon={faEdit} onClick={() => editClicked(movie)}/>
+                            <FontAwesomeIcon icon={faTrash} onClick={() => removeClicked(movie)}/>
                         </div>
                     )
                 })

@@ -8,12 +8,12 @@ class MovieDetails extends Component {
         highlighted: -1
     }
 
-    highlightRate = high => evt => {
+    highlightRate = high => {
         this.setState({highlighted: high})
     }
 
-    rateClicked = stars => evt => {
-        fetch(process.env.REACT_APP_API_URL +"/api/movies/" + this.props.movie.id + "/rate_movie/", {
+    rateClicked = stars => {
+        fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.props.movie.id + "/rate_movie/", {
             method: 'POST',
             headers: {
                 "Authorization": "Token 06ec4b621d5c3a32730c87ecd69fbf20e36c5b9c",
@@ -24,7 +24,7 @@ class MovieDetails extends Component {
             .catch(error => console.log(error))
     }
     getDetails = () => {
-        fetch(process.env.REACT_APP_API_URL +"/api/movies/" + this.props.movie.id + "/", {
+        fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.props.movie.id + "/", {
             method: 'GET',
             headers: {
                 "Authorization": "Token 06ec4b621d5c3a32730c87ecd69fbf20e36c5b9c",
@@ -59,9 +59,9 @@ class MovieDetails extends Component {
                             {[...Array(5)].map((e, i) => {
                                 return <FontAwesomeIcon key={i} icon={faStar}
                                                         color={this.state.highlighted > i - 1 ? 'purple' : ''}
-                                                        onMouseEnter={this.highlightRate(i)}
-                                                        onMouseLeave={this.highlightRate(-1)}
-                                                        onClick={this.rateClicked(i + 1)}/>
+                                                        onMouseEnter={() => this.highlightRate(i)}
+                                                        onMouseLeave={() => this.highlightRate(-1)}
+                                                        onClick={() => this.rateClicked(i + 1)}/>
                             })}
                         </div>
                     </div>
