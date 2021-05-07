@@ -4,6 +4,8 @@ import {Component} from "react";
 import MovieList from "./components/movie/list";
 import MovieDetails from "./components/movie/detail";
 import MovieForm from "./components/movie/form";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faFilm} from '@fortawesome/free-solid-svg-icons'
 
 
 class App extends Component {
@@ -54,7 +56,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <h1>Movie Rater</h1>
+                <h1><span><FontAwesomeIcon icon={faFilm}/>Movie Rater</span></h1>
                 <div className="layout">
                     <MovieList movies={this.state.movies} movieClicked={this.movieClicked}
                                movieDeleted={this.movieDeleted} editClicked={this.editClicked}

@@ -54,7 +54,9 @@ class MovieDetails extends Component {
                                          color={mov.avg_rating > 4 ? 'orange' : ''}/>
                         ({mov.no_of_ratings})
                         <p>{mov.description}</p>
+                        <br/>
                         <div className="rate-container">
+                            <br/>
                             <h2>Rate it !!!</h2>
                             {[...Array(5)].map((e, i) => {
                                 return <FontAwesomeIcon key={i} icon={faStar}

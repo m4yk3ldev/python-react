@@ -42,6 +42,8 @@ class MovieForm extends Component {
     render() {
         const mov = this.props.movie
         console.log(mov)
+        const isDisable = this.state.editedMovie.title.length === 0 ||
+            this.state.editedMovie.description.length === 0
         return (
             <React.Fragment>
                 <span>Title</span><br/>
@@ -50,7 +52,7 @@ class MovieForm extends Component {
                 <span>Description</span><br/>
                 <textarea name="description" value={mov.description} onChange={this.inputChanged}/>
                 <br/>
-                <button onClick={mov.id ? this.updateClicked : this.saveClicked}>Save</button>
+                <button disabled={isDisable} onClick={mov.id ? this.updateClicked : this.saveClicked}>Save</button>
                 <button onClick={this.cancelClicked}>Cancel</button>
 
             </React.Fragment>
