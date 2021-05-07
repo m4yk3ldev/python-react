@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
 from rest_framework import viewsets, status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
@@ -49,3 +50,7 @@ class MovieViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
+
+
+class ReactTest(TemplateView):
+    template_name = "build/index.html"

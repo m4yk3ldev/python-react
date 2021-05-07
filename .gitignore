@@ -130,3 +130,6 @@ dmypy.json
 node_modules
 package-lock.json
 .idea
+templates/node_modules
+templates/package-lock.json
+templates/yarn.lock
