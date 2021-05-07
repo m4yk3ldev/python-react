@@ -12,13 +12,24 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: left;
+    grid-gap: 20px;
 }
 
 .rate-container {
     border-top: 2px solid purple;
 }
 
-.rate-container span.fa {
+.rate-container svg.fa {
     font-size: 2em;
     cursor: pointer;
+}
+
+.movie-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+}
+
+.movie-item svg {
+    font-size: 1.2em;
+    margin: 16px 5px;
 }

@@ -3,12 +3,14 @@ import {Component} from "react";
 
 import MovieList from "./components/movie/list";
 import MovieDetails from "./components/movie/detail";
+import MovieForm from "./components/movie/form";
 
 
 class App extends Component {
     state = {
         movies: [],
-        selectedMovie: null
+        selectedMovie: null,
+        editedMovie: null,
     }
 
     componentDidMount() {
@@ -25,7 +27,25 @@ class App extends Component {
     }
 
     movieClicked = movie => {
-        this.setState({selectedMovie: movie})
+        this.setState({selectedMovie: movie, editedMovie: null})
+    }
+    movieDeleted = selMovie => {
+        const movies = this.state.movies.filter(movie => movie.id !== selMovie.id);
+        this.setState({movies: movies, editedMovie: null})
+        this.componentDidMount();
+    }
+
+    editClicked = selMovie => {
+        this.setState({editedMovie: selMovie})
+        this.componentDidMount();
+    }
+    newMovie = () => {
+        this.setState({editedMovie: {title: '', description: ''}})
+        this.componentDidMount();
+    }
+    cancelForm = () => {
+        this.setState({editedMovie: null})
+        this.componentDidMount();
     }
 
     render() {
@@ -33,8 +53,19 @@ class App extends Component {
             <div className="App">
                 <h1>Movie Rater</h1>
                 <div className="layout">
-                    <MovieList movies={this.state.movies} movieClicked={this.movieClicked}/>
-                    <MovieDetails movie={this.state.selectedMovie} updateMovie={this.movieClicked}/>
+                    <MovieList movies={this.state.movies} movieClicked={this.movieClicked}
+                               movieDeleted={this.movieDeleted} editClicked={this.editClicked}
+                               newMovie={this.newMovie}/>
+                    <div>
+                        {this.state.editedMovie ? (
+                            <MovieForm movie={this.state.editedMovie} cancelForm={this.cancelForm}/>
+                        ) : (
+                            <MovieDetails movie={this.state.selectedMovie} updateMovie={this.movieClicked}/>
+
+                        )}
+
+
+                    </div>
                 </div>
             </div>
         );
