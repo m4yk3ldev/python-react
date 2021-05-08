@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 class MovieForm extends Component {
     state = {
-        editedMovie: this.props.movie
+        editedMovie: this.props.movie,
+        token: this.props.token,
     }
     inputChanged = event => {
         let movie = this.state.editedMovie;
@@ -17,7 +18,7 @@ class MovieForm extends Component {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/", {
             method: 'POST',
             headers: {
-                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
+                "Authorization": "Token " + this.state.token,
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify(this.state.editedMovie)
@@ -33,7 +34,7 @@ class MovieForm extends Component {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.state.editedMovie.id + "/", {
             method: 'PUT',
             headers: {
-                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
+                "Authorization": "Token " + this.state.token,
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify(this.state.editedMovie)

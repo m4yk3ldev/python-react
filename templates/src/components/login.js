@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withCookies} from "react-cookie";
 
 class Login extends Component {
     state = {
@@ -23,6 +24,7 @@ class Login extends Component {
         }).then(resp => resp.json()).then(res => {
             console.log(res.token);
             if (res.token) {
+                this.props.cookies.set('mr-token', res.token)
                 window.location.href = "/movies"
             }
         })
@@ -48,4 +50,4 @@ class Login extends Component {
 
 }
 
-export default Login;
+export default withCookies(Login);

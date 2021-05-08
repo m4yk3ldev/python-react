@@ -5,7 +5,8 @@ import {faStar} from '@fortawesome/free-solid-svg-icons'
 
 class MovieDetails extends Component {
     state = {
-        highlighted: -1
+        highlighted: -1,
+        token: this.props.token
     }
 
     highlightRate = high => {
@@ -16,7 +17,7 @@ class MovieDetails extends Component {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.props.movie.id + "/rate_movie/", {
             method: 'POST',
             headers: {
-                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
+                "Authorization": "Token " + this.state.token,
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify({stars: stars})
@@ -27,7 +28,7 @@ class MovieDetails extends Component {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.props.movie.id + "/", {
             method: 'GET',
             headers: {
-                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
+                "Authorization": "Token " + this.state.token,
                 "Content-Type": 'application/json'
             },
         }).then(resp => resp.json()).then(res => this.props.updateMovie(res))

@@ -12,7 +12,7 @@ function MovieList(props) {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/" + movie.id, {
             method: 'DELETE',
             headers: {
-                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
+                "Authorization": "Token "+props.token,
                 "Content-Type": 'application/json'
             },
         }).then(resp => props.movieDeleted(movie))
