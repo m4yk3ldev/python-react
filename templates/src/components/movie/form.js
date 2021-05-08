@@ -7,7 +7,6 @@ class MovieForm extends Component {
     inputChanged = event => {
         let movie = this.state.editedMovie;
         movie[event.target.name] = event.target.value;
-        console.log(movie)
         this.setState({editedMovie: movie});
     }
 
@@ -15,23 +14,26 @@ class MovieForm extends Component {
         this.props.cancelForm();
     }
     saveClicked = () => {
-        console.log(this.state.editedMovie)
         fetch(process.env.REACT_APP_API_URL + "/api/movies/", {
             method: 'POST',
             headers: {
-                "Authorization": "Token 06ec4b621d5c3a32730c87ecd69fbf20e36c5b9c",
+                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify(this.state.editedMovie)
-        }).then(resp => resp.json()).then(res => this.props.newMovie(res))
+        }).then(resp => resp.json()).then(res => {
+            this.props.newMovie(res);
+            this.props.movie.title = ''
+            this.props.movie.description = ''
+
+        })
             .catch(error => console.log(error))
     }
     updateClicked = () => {
-        console.log(this.state.editedMovie)
         fetch(process.env.REACT_APP_API_URL + "/api/movies/" + this.state.editedMovie.id + "/", {
             method: 'PUT',
             headers: {
-                "Authorization": "Token 06ec4b621d5c3a32730c87ecd69fbf20e36c5b9c",
+                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870",
                 "Content-Type": 'application/json'
             },
             body: JSON.stringify(this.state.editedMovie)
@@ -41,7 +43,6 @@ class MovieForm extends Component {
 
     render() {
         const mov = this.props.movie
-        console.log(mov)
         const isDisable = this.state.editedMovie.title.length === 0 ||
             this.state.editedMovie.description.length === 0
         return (

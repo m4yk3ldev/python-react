@@ -74,3 +74,8 @@ h1 span svg {
     color: white;
     transform: rotate(30deg);
 }
+
+.login-container {
+    width: 50%;
+    margin: 50px 25px;
+}

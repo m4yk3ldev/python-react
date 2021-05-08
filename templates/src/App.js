@@ -19,7 +19,7 @@ class App extends Component {
         fetch(process.env.REACT_APP_API_URL + "/api/movies/", {
             method: 'GET',
             headers: {
-                "Authorization": "Token 06ec4b621d5c3a32730c87ecd69fbf20e36c5b9c"
+                "Authorization": "Token ba8e52d0d1878e1702d7d90e0cb6f41ae5745870"
             }
         }).then(resp => resp.json())
             .then(res => {
